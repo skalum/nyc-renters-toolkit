@@ -2,9 +2,15 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+import HpdContainer from './containers/HpdContainer'
+
 class App extends Component {
   render() {
     return (
+      <HpdContainer />
+    );
+
+/*    return (
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
@@ -21,7 +27,7 @@ class App extends Component {
           </a>
         </header>
       </div>
-    );
+    ); */
   }
 }
 
