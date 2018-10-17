@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-import HpdContainer from './containers/HpdContainer'
+import AddressContainer from './containers/AddressContainer'
 
 class App extends Component {
   render() {
     return (
-      <HpdContainer />
+      <AddressContainer />
     );
 
 /*    return (
