@@ -3,30 +3,25 @@ import { connect } from 'react-redux';
 
 import { fetchHpdViolations } from '../actions/hpdActions'
 
+import HpdViolations from '../components/HpdViolations'
+
 class HpdContainer extends Component {
+
   componentDidMount() {
-    this.props.fetchHpdViolations();
+    this.props.fetchHpdViolations(this.props.address.bin);
   }
 
   render() {
     return (
       <div>
-        {this.props.violations.map(violation => (
-          <p key={violation.violationid}>
-            <strong>{violation.approveddate}</strong><br />
-            <span>{violation.novdescription}</span><br />
-            {violation.violationstatus === 'Open' &&
-              <strong>OPEN</strong>
-            }
-          </p>
-        ))}
+        <HpdViolations violations={this.props.violations} />
       </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  violations: state.hpdViolations.violations
+  violations: state.hpdViolations.violations,
 });
 
 export default connect(mapStateToProps, { fetchHpdViolations })(HpdContainer);
