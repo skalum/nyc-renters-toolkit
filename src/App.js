@@ -34,9 +34,10 @@ class App extends Component {
 
   render() {
     return (
+      <>
       <Router>
         <div>
-          <Navbar color="light" light expand="md">
+          <Navbar color="light" light expand="md" fixed="top">
             <NavbarBrand href="/">NYC Renter Toolkit</NavbarBrand>
             <NavbarToggler onClick={this.toggle} />
             <Collapse isOpen={this.state.isOpen} navbar>
@@ -69,13 +70,14 @@ class App extends Component {
           <Route path="/hpd" component={Hpd} />
         </div>
       </Router>
+    </>
     );
   }
 }
 
 const Home = () => (
-  <div>
-    <Container>
+  <div role="main" class="container">
+    <br /><br /><br />
       <Jumbotron>
         <h1 className="display-3">Weclcome to the NYC Renter Toolkit!</h1>
         <p className="lead">This is a simple hero unit, a simple Jumbotron-style component for calling extra attention to featured content or information.</p>
@@ -85,7 +87,6 @@ const Home = () => (
           <Button color="primary">Learn More</Button>
         </p>
       </Jumbotron>
-    </Container>
   </div>
 )
 
