@@ -16,6 +16,7 @@ import {
 
 import AddressContainer from './containers/AddressContainer'
 import ProfileContainer from './containers/ProfileContainer'
+import HpdContainer from './containers/HpdContainer'
 import Login from './components/Login'
 
 class App extends Component {
@@ -46,6 +47,9 @@ class App extends Component {
                   <NavLink className="nav-link" to="/profile">Profile</NavLink>
                 </NavItem>
                 <NavItem>
+                  <NavLink className="nav-link" to="/311">311</NavLink>
+                </NavItem>
+                <NavItem>
                   <NavLink className="nav-link" to="/login">Login</NavLink>
                 </NavItem>
               </Nav>
@@ -55,6 +59,7 @@ class App extends Component {
           <Route exact path="/" component={Home} />
           <Route path="/address" component={AddressContainer} />
           <Route path="/profile" component={ProfileContainer} />
+          <Route path="/311" component={HpdContainer} />
           <Route path="/login" component={Login} />
         </div>
       </Router>
