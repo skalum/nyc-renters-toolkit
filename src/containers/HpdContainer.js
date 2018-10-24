@@ -4,9 +4,10 @@ import { connect } from 'react-redux';
 import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col } from 'reactstrap';
 import classnames from 'classnames';
 
-import { fetchHpdViolations } from '../actions/hpdActions'
+import { fetchHpdViolations, fetch311Complaints } from '../actions/hpdActions'
 
 import HpdViolations from '../components/HpdViolations'
+import HpdComplaints from '../components/HpdComplaints'
 
 class HpdContainer extends Component {
   constructor(props) {
@@ -28,6 +29,7 @@ class HpdContainer extends Component {
 
   componentDidMount() {
     this.props.fetchHpdViolations(this.props.bin);
+    this.props.fetch311Complaints(this.props.bbl);
   }
 
   render() {
@@ -47,22 +49,22 @@ class HpdContainer extends Component {
               className={classnames({ active: this.state.activeTab === '2' })}
               onClick={() => { this.toggle('2'); }}
             >
-              Moar Tabs
+              Complaints
             </NavLink>
           </NavItem>
         </Nav>
         <TabContent activeTab={this.state.activeTab}>
           <TabPane tabId="1">
             <Row>
-              <Col sm="12">
+              <Col>
                 <HpdViolations violations={this.props.violations} />
               </Col>
             </Row>
           </TabPane>
           <TabPane tabId="2">
             <Row>
-              <Col sm="6">
-
+              <Col>
+                <HpdComplaints complaints={this.props.complaints} />
               </Col>
             </Row>
           </TabPane>
@@ -74,7 +76,9 @@ class HpdContainer extends Component {
 
 const mapStateToProps = state => ({
   bin: state.address.address.buildingIdentificationNumber,
+  bbl: state.address.address.bbl,
   violations: state.hpdViolations.violations,
+  complaints: state.hpdViolations.complaints,
 });
 
-export default connect(mapStateToProps, { fetchHpdViolations })(HpdContainer);
+export default connect(mapStateToProps, { fetchHpdViolations, fetch311Complaints })(HpdContainer);

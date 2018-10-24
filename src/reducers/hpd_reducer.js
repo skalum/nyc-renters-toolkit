@@ -1,23 +1,35 @@
 export default function hpdReducer (state = {
-  loading: false,
-  violations: []
+  loadingViolations: false,
+  loadingComplaints: false,
+  violations: [],
+  complaints: [],
 }, action) {
   switch(action.type) {
     case 'LOADING_VIOLATIONS':
       return {
         ...state,
-        loading: true
+        loadingViolations: true
       };
 
     case 'FETCH_VIOLATIONS':
       return {
         ...state,
-        loading: false,
-        violations: [
-          ...state.violations,
-          ...action.violations
-        ]
+        loadingViolations: false,
+        violations: action.violations,
       };
+
+    case 'LOADING_COMPLAINTS':
+      return {
+        ...state,
+        loadingComplaints: true,
+      }
+
+    case 'FETCH_COMPLAINTS':
+      return {
+        ...state,
+        loadingComplaints: false,
+        complaints: action.complaints,
+      }
 
     default:
       return state;

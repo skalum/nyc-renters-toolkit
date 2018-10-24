@@ -3,7 +3,7 @@ import React from 'react';
 import {
   Table, } from 'reactstrap';
 
-const Address = (props) => {
+const HpdViolations = (props) => {
   return (
     <div>
       <Table>
@@ -32,4 +32,4 @@ const Address = (props) => {
   )
 }
 
-export default Address;
+export default HpdViolations;

@@ -6,3 +6,12 @@ export function fetchHpdViolations(bin) {
       .then(response => dispatch({ type: 'FETCH_VIOLATIONS', violations: response }));
   };
 }
+
+export function fetch311Complaints(bbl) {
+  return (dispatch) => {
+    dispatch({ type: 'LOADING_COMPLAINTS' });
+    return fetch(`https://data.cityofnewyork.us/resource/fhrw-4uyv.json?bbl=${bbl}&$$app_token=97bbm8fXKcBIYPVS059qhJOOk`)
+      .then(response => response.json())
+      .then(response => dispatch({ type: 'FETCH_COMPLAINTS', complaints: response }));
+  };
+}
