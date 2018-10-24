@@ -10,7 +10,7 @@ class AddressContainer extends Component {
 
   render() {
     return (
-      <div>
+      <div className="container mt-5 pt-5">
         <AddressInput setAddress={this.props.setAddress} />
         <Address address={this.props.address} />
       </div>
@@ -20,6 +20,7 @@ class AddressContainer extends Component {
 
 const mapStateToProps = state => ({
   address: state.address.address,
+
 });
 
 export default connect(mapStateToProps, { setAddress })(AddressContainer);
