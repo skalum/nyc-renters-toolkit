@@ -17,7 +17,7 @@ import {
 import AddressContainer from './containers/AddressContainer'
 import ProfileContainer from './containers/ProfileContainer'
 import HpdContainer from './containers/HpdContainer'
-import Login from './components/Login'
+import Login from './components/users/Login'
 
 class App extends Component {
   state = {

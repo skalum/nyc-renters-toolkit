@@ -11,7 +11,7 @@ class AddressContainer extends Component {
   render() {
     return (
       <div className="container mt-5 pt-5">
-        <AddressInput setAddress={this.props.setAddress} />
+        <AddressInput setAddress={this.props.setAddress} user={this.props.user} />
         <Address address={this.props.address} />
       </div>
     );
@@ -20,7 +20,7 @@ class AddressContainer extends Component {
 
 const mapStateToProps = state => ({
   address: state.address.address,
-
+  user: state.auth.currentUser,
 });
 
 export default connect(mapStateToProps, { setAddress })(AddressContainer);

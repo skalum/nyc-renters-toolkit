@@ -15,7 +15,7 @@ class AddressInput extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    this.props.setAddress(this.state);
+    this.props.setAddress(this.state, this.props.user);
   }
 
   render() {
