@@ -18,6 +18,7 @@ import AddressContainer from './containers/AddressContainer'
 import ProfileContainer from './containers/ProfileContainer'
 import HpdContainer from './containers/HpdContainer'
 import Login from './components/users/Login'
+import Signup from './components/user/Signup'
 
 class App extends Component {
   state = {
@@ -33,37 +34,45 @@ class App extends Component {
   render() {
     return (
       <>
-      <Router>
-        <div>
-          <Navbar color="light" light expand="md" fixed="top">
-            <NavbarBrand href="/">NYC Renter Toolkit</NavbarBrand>
-            <NavbarToggler onClick={this.toggle} />
-            <Collapse isOpen={this.state.isOpen} navbar>
-              <Nav className="ml-auto" navbar>
-                <NavItem>
-                  <NavLink className="nav-link" to="/address">Set Address</NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink className="nav-link" to="/profile">Profile</NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink className="nav-link" to="/311">311</NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink className="nav-link" to="/login">Login</NavLink>
-                </NavItem>
-              </Nav>
-            </Collapse>
-          </Navbar>
+        <Router>
+          <div>
+            <Navbar color="light" light expand="md" fixed="top">
+              <NavbarBrand href="/">NYC Renter Toolkit</NavbarBrand>
+              <NavbarToggler onClick={this.toggle} />
+              <Collapse isOpen={this.state.isOpen} navbar>
+                <Nav className="ml-auto" navbar>
+                  {this.props.isAuthenticated &&
+                    <NavItem>
+                      <NavLink className="nav-link" to="/address">Set Address</NavLink>
+                    </NavItem>
+                    <NavItem>
+                      <NavLink className="nav-link" to="/profile">Profile</NavLink>
+                    </NavItem>
+                    <NavItem>
+                      <NavLink className="nav-link" to="/311">311</NavLink>
+                    </NavItem>
+                  }
+                  {!this.props.isAuthenticated &&
+                    <NavItem>
+                      <NavLink className="nav-link" to="/login">Login</NavLink>
+                    </NavItem>
+                    <NavItem>
+                      <NavLink className="nav-link" to="/signup">Login</NavLink>
+                    </NavItem>
+                  }
+                </Nav>
+              </Collapse>
+            </Navbar>
 
-          <Route exact path="/" component={Home} />
-          <Route path="/address" component={AddressContainer} />
-          <Route path="/profile" component={ProfileContainer} />
-          <Route path="/311" component={HpdContainer} />
-          <Route path="/login" component={Login} />
-        </div>
-      </Router>
-    </>
+            <Route exact path="/" component={Home} />
+            <Route path="/address" component={AddressContainer} />
+            <Route path="/profile" component={ProfileContainer} />
+            <Route path="/311" component={HpdContainer} />
+            <Route path="/login" component={Login} />
+            <Route path="/signup" component={Signup} />
+          </div>
+        </Router>
+      </>
     );
   }
 }
@@ -83,4 +92,8 @@ const Home = () => (
   </div>
 )
 
-export default App;
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps)(App);
