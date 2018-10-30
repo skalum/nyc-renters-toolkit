@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col } from 'reactstrap';
 import classnames from 'classnames';
 
+import { setAddress, setRegistrationId, setRegistrationInfo } from '../actions/addressActions'
 import { fetchHpdViolations, fetch311Complaints } from '../actions/hpdActions'
 
 import HpdViolations from '../components/HpdViolations'
@@ -19,17 +20,23 @@ class HpdContainer extends Component {
     };
   }
 
+  componentDidMount() {
+    if (!this.props.houseNumber && this.props.user.houseNumber !== '') {
+      this.props.setAddress(this.props.user, this.props.user)
+        .then(() => this.props.fetchHpdViolations(this.props.bin))
+        .then(() => this.props.fetch311Complaints(this.props.bbl));
+    } else {
+      this.props.fetchHpdViolations(this.props.bin)
+        .then(() => this.props.fetch311Complaints(this.props.bbl));
+    }
+  }
+
   toggle(tab) {
     if (this.state.activeTab !== tab) {
       this.setState({
         activeTab: tab
       });
     }
-  }
-
-  componentDidMount() {
-    this.props.fetchHpdViolations(this.props.bin);
-    this.props.fetch311Complaints(this.props.bbl);
   }
 
   render() {
@@ -79,6 +86,8 @@ const mapStateToProps = state => ({
   bbl: state.address.address.bbl,
   violations: state.hpdViolations.violations,
   complaints: state.hpdViolations.complaints,
+  houseNumber: state.address.address.houseNumber,
+  user: state.auth.currentUser,
 });
 
-export default connect(mapStateToProps, { fetchHpdViolations, fetch311Complaints })(HpdContainer);
+export default connect(mapStateToProps, { setRegistrationId, setRegistrationInfo, setAddress, fetchHpdViolations, fetch311Complaints })(HpdContainer);

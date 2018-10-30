@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { setAddress } from '../actions/addressActions'
-
 import AddressInput from '../components/AddressInput'
 import Address from '../components/Address'
 
+import { setAddress } from '../actions/addressActions'
+
 class AddressContainer extends Component {
+
+  componentDidMount() {
+    if (!this.props.address.houseNumber && this.props.user.houseNumber !== '') {
+      this.props.setAddress(this.props.user, this.props.user);
+    }
+  }
 
   render() {
     return (

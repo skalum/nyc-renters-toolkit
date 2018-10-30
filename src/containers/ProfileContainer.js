@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { setRegistrationId, setRegistrationInfo } from '../actions/addressActions'
 
 import {
   ListGroup,
@@ -9,12 +8,22 @@ import {
   ListGroupItemHeading,
   UncontrolledTooltip, } from 'reactstrap';
 
+import { setAddress, setRegistrationId, setRegistrationInfo } from '../actions/addressActions'
+
 class ProfileContainer extends Component {
 
-  render() {
-    this.props.setRegistrationId(this.props.bin)
-      .then(() => this.props.setRegistrationInfo(this.props.registrationId));
+  componentDidMount() {
+    if (!this.props.houseNumber && this.props.user.houseNumber !== '') {
+      this.props.setAddress(this.props.user, this.props.user)
+        .then(() => this.props.setRegistrationId(this.props.bin))
+        .then(() => this.props.setRegistrationInfo(this.props.registrationId));
+    } else {
+      this.props.setRegistrationId(this.props.bin)
+        .then(() => this.props.setRegistrationInfo(this.props.registrationId));
+    }
+  }
 
+  render() {
     return (
       <div className="container mt-5">
         <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -64,29 +73,6 @@ class ProfileContainer extends Component {
             </dl>
           </div>
         </section>
-      <ListGroup>
-        <ListGroupItem>
-          <ListGroupItemHeading>Lot</ListGroupItemHeading>
-          <dl>
-            <ListGroupItemText>
-            <dt>Address</dt>
-            <dd>3 W 122nd St</dd>
-            </ListGroupItemText>
-          </dl>
-        </ListGroupItem>
-        <ListGroupItem>
-          <ListGroupItemHeading>List group item heading</ListGroupItemHeading>
-          <ListGroupItemText>
-          Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.
-          </ListGroupItemText>
-        </ListGroupItem>
-        <ListGroupItem>
-          <ListGroupItemHeading>List group item heading</ListGroupItemHeading>
-          <ListGroupItemText>
-          Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.
-          </ListGroupItemText>
-        </ListGroupItem>
-      </ListGroup>
     </div>
     );
   }
@@ -114,6 +100,7 @@ const mapStateToProps = state => ({
   registrationId: state.address.registrationId,
   corporateOwner: state.address.registration.corporateOwner,
   agent: state.address.registration.agent,
+  user: state.auth.currentUser,
 });
 
-export default connect(mapStateToProps, { setRegistrationId, setRegistrationInfo })(ProfileContainer);
+export default connect(mapStateToProps, { setRegistrationId, setRegistrationInfo, setAddress })(ProfileContainer);

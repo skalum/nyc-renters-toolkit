@@ -1,13 +1,21 @@
-export function setAddress({houseNumber, street, zip}, user) {
+export function setAddress(address, user) {
+  debugger;
   return (dispatch) => {
     dispatch({ type: 'LOADING_ADDRESS' });
-    fetch(`https://api.cityofnewyork.us/geoclient/v1/address.json?houseNumber=${houseNumber}&street=${street}&zip=${zip}&app_id=f9c9628a&app_key=330f11b7efef935b69550b93499bc7a3`)
+    return fetch(`https://api.cityofnewyork.us/geoclient/v1/address.json?houseNumber=${address.houseNumber}&street=${address.street}&zip=${address.zip}&app_id=f9c9628a&app_key=330f11b7efef935b69550b93499bc7a3`)
       .then(response => response.json())
       .then(response => {
+        user.bin = response.address.buildingIdentificationNumber;
+        user.houseNumber = response.address.houseNumber;
+        user.street = response.address.boePreferredStreetName;
+        user.zip = response.address.zipCode;
         const config = {
           method: 'PUT',
           body: JSON.stringify({
-            bin: response.address.buildingIdentificationNumber,
+            bin: user.bin,
+            houseNumber: user.houseNumber,
+            street: user.street,
+            zip: user.zip,
           }),
           headers: {
             'Accept' : 'application/json',

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 
 import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
+import { connect } from 'react-redux'
 
 import {
   Button,
@@ -18,7 +19,10 @@ import AddressContainer from './containers/AddressContainer'
 import ProfileContainer from './containers/ProfileContainer'
 import HpdContainer from './containers/HpdContainer'
 import Login from './components/users/Login'
-import Signup from './components/user/Signup'
+import Signup from './components/users/Signup'
+
+import login from './actions/authActions'
+import { setAddress } from './actions/addressActions'
 
 class App extends Component {
   state = {
@@ -29,6 +33,12 @@ class App extends Component {
     this.setState({
       isOpen: !this.state.isOpen
     });
+  }
+
+  componentDidMount() {
+    if (this.props.isAuthenticated) {
+      this.props.login({token: localStorage["renter.token"]}, this.props.history);
+    }
   }
 
   render() {
@@ -42,23 +52,27 @@ class App extends Component {
               <Collapse isOpen={this.state.isOpen} navbar>
                 <Nav className="ml-auto" navbar>
                   {this.props.isAuthenticated &&
-                    <NavItem>
-                      <NavLink className="nav-link" to="/address">Set Address</NavLink>
-                    </NavItem>
-                    <NavItem>
-                      <NavLink className="nav-link" to="/profile">Profile</NavLink>
-                    </NavItem>
-                    <NavItem>
-                      <NavLink className="nav-link" to="/311">311</NavLink>
-                    </NavItem>
+                    <>
+                      <NavItem>
+                        <NavLink className="nav-link" to="/address">Set Address</NavLink>
+                      </NavItem>
+                      <NavItem>
+                        <NavLink className="nav-link" to="/profile">Profile</NavLink>
+                      </NavItem>
+                      <NavItem>
+                        <NavLink className="nav-link" to="/311">311</NavLink>
+                      </NavItem>
+                      </>
                   }
                   {!this.props.isAuthenticated &&
-                    <NavItem>
-                      <NavLink className="nav-link" to="/login">Login</NavLink>
-                    </NavItem>
-                    <NavItem>
-                      <NavLink className="nav-link" to="/signup">Login</NavLink>
-                    </NavItem>
+                    <>
+                      <NavItem>
+                        <NavLink className="nav-link" to="/login">Login</NavLink>
+                      </NavItem>
+                      <NavItem>
+                        <NavLink className="nav-link" to="/signup">Login</NavLink>
+                      </NavItem>
+                    </>
                   }
                 </Nav>
               </Collapse>
@@ -94,6 +108,8 @@ const Home = () => (
 
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
+  user: state.auth.currentUser,
+  address: state.address.address,
 });
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, { login, setAddress })(App);

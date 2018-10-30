@@ -26,7 +26,7 @@ function loginError(message) {
 }
 
 export default function login(creds, router) {
-  let config = {
+  const config = {
     method: 'POST',
     body: JSON.stringify({
       user: creds
