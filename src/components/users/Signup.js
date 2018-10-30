@@ -1,32 +1,39 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import login from '../actions/authActions'
 
-class LoginForm extends Component {
-  state = {
-    email: '',
-    password: ''
+import signup from '../../actions/signupActions'
+
+class SignupForm extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      email: '',
+      password: '',
+    }
   }
 
   handleChange = event => {
+    const { name, value } = event.target;
     this.setState({
-      [event.target.name]: event.target.value
-    });
+      [name]: value
+    })
   }
 
   handleSubmit = event => {
     event.preventDefault();
-    this.props.login(this.state, this.props.history);
+    this.props.signup(this.state, this.props.history);
     this.setState({
       email: '',
-      password: ''
+      password: '',
+      admin: false
     })
   }
 
   render() {
     return (
       <div>
-        <h2>Welcome back! Sign in to continue.</h2>
+        <h2>Sign up</h2>
         <form onSubmit={this.handleSubmit}>
           <div>
             <label>Email:</label><br />
@@ -38,11 +45,11 @@ class LoginForm extends Component {
             <input name="password" type="password" value={this.state.password} onChange={this.handleChange} />
           </div>
           <br></br>
-          <input type="submit" />
+          <input type="Submit" />
         </form>
       </div>
     )
   }
 }
 
-export default connect(null, { login })(LoginForm)
+export default connect(null, { signup })(SignupForm)
