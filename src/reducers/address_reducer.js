@@ -2,7 +2,9 @@ export default function hpdReducer (state = {
   loadingAddress: false,
   loadingRegistrationId: false,
   loadingRegistrationInfo: false,
-  address: {},
+  address: {
+    firstBoroughName: ''
+  },
   registrationId: '',
   registration: {
     corporateOwner: '',

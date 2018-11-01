@@ -17,10 +17,18 @@ class ProfileContainer extends Component {
       this.props.setAddress(this.props.user, this.props.user)
         .then(() => this.props.setRegistrationId(this.props.bin))
         .then(() => this.props.setRegistrationInfo(this.props.registrationId));
+//        .then(() => this.props.getUnitsInfo(this.props.bin));
     } else {
       this.props.setRegistrationId(this.props.bin)
         .then(() => this.props.setRegistrationInfo(this.props.registrationId));
+//        .then(() => this.props.getUnitsInfo(this.props.bin));
     }
+  }
+
+  getOrdinal(n) {
+    var s=["th","st","nd","rd"],
+    v=n%100;
+    return n+(s[(v-20)%10]||s[v]||s[0]);
   }
 
   render() {
@@ -59,15 +67,15 @@ class ProfileContainer extends Component {
               <dt>Neighborhood</dt>
               <dd>{this.props.ntaName}</dd>
               <dt>Community District</dt>
-              <dd>{this.props.communityDistrictNumber}</dd>
+              <dd><a href={`https://communityprofiles.planning.nyc.gov/${this.props.borough.toLowerCase().replace(' ', '-')}/${this.props.communityDistrictNumber}`}>{this.props.communityDistrictNumber}</a></dd>
               <dt>City Council</dt>
               <dd>{this.props.cityCouncilDistrict}</dd>
               <dt>Police Precinct</dt>
-              <dd>{this.props.policePrecinct}</dd>
+              <dd><a href={`https://www1.nyc.gov/site/nypd/bureaus/patrol/precincts/${this.getOrdinal(this.props.policePrecinct).replace(/^0+/, '')}-precinct.page`}>{this.props.policePrecinct}</a></dd>
               <dt>Fire Company</dt>
-              <dd>{this.props.fireCompanyType}{this.props.fireCompanyNumber}</dd>
+              <dd><a href="https://www1.nyc.gov/site/fdny/index.page">{this.props.fireCompanyType}{this.props.fireCompanyNumber}</a></dd>
               <dt>School District</dt>
-              <dd>{this.props.communitySchoolDistrict}</dd>
+              <dd><a href={`https://insideschools.org/districts/${this.props.communitySchoolDistrict}`}>{this.props.communitySchoolDistrict}</a></dd>
               <dt>Census Tract</dt>
               <dd>{this.props.censusTract2010}</dd>
             </dl>
@@ -84,6 +92,9 @@ const mapStateToProps = state => ({
   streetName: state.address.address.boePreferredStreetName,
   city: state.address.address.uspsPreferredCityName,
   zip: state.address.address.zipCode,
+  latitude: state.address.address.latitude,
+  longitude: state.address.address.longitude,
+  borough: state.address.address.firstBoroughName,
   bbl: state.address.address.bbl,
   bblBoroughCode: state.address.address.bblBoroughCode,
   bblTaxBlock: state.address.address.bblTaxBlock,
