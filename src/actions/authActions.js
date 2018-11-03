@@ -1,3 +1,32 @@
+export function login (creds, router) {
+  const config = {
+    method: 'POST',
+    body: JSON.stringify({
+      user: creds
+    }),
+    headers: {
+      'Accept' : 'application/json',
+      'Content-Type': 'application/json'
+    }
+  }
+
+  return dispatch => {
+    dispatch(authenticationRequest(creds))
+    return fetch('/api/auth', config)
+      .then(response => response.json())
+      .then(body => {
+        if (body.user.id) {
+          localStorage.setItem('renter.token', body.token);
+          dispatch(setCurrentUser(body.user));
+          router.replace(`/`)
+        } else {
+          dispatch(loginError(body.error))
+          return Promise.reject(body)
+        }
+    }).catch(err => console.log("Error: ", err))
+  }
+}
+
 function authenticationRequest(creds) {
   return {
     type: 'AUTHENTICATION_REQUEST',
@@ -25,31 +54,9 @@ function loginError(message) {
   }
 }
 
-export default function login(creds, router) {
-  const config = {
-    method: 'POST',
-    body: JSON.stringify({
-      user: creds
-    }),
-    headers: {
-      'Accept' : 'application/json',
-      'Content-Type': 'application/json'
-    }
-  }
-
+export function signout() {
   return dispatch => {
-    dispatch(authenticationRequest(creds))
-    return fetch('/api/auth', config)
-      .then(response => response.json())
-      .then(body => {
-        if (body.user.id) {
-          localStorage.setItem('renter.token', body.token);
-          dispatch(setCurrentUser(body.user));
-          router.replace(`/`)
-        } else {
-          dispatch(loginError(body.error))
-          return Promise.reject(body)
-        }
-    }).catch(err => console.log("Error: ", err))
+    localStorage.removeItem('renter.token');
+    dispatch({ type: 'LOGOUT_SUCCESS', isAuthenticating: false, isAuthenticated: false });
   }
 }

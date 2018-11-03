@@ -20,8 +20,9 @@ import ProfileContainer from './containers/ProfileContainer'
 import HpdContainer from './containers/HpdContainer'
 import Login from './components/users/Login'
 import Signup from './components/users/Signup'
+import Signout from './components/users/Signout'
 
-import login from './actions/authActions'
+import { login } from './actions/authActions'
 import { setAddress } from './actions/addressActions'
 
 class App extends Component {
@@ -62,6 +63,9 @@ class App extends Component {
                       <NavItem>
                         <NavLink className="nav-link" to="/311">311</NavLink>
                       </NavItem>
+                      <NavItem>
+                        <NavLink className="nav-link" to="/signout">Sign out</NavLink>
+                      </NavItem>
                       </>
                   }
                   {!this.props.isAuthenticated &&
@@ -70,7 +74,7 @@ class App extends Component {
                         <NavLink className="nav-link" to="/login">Login</NavLink>
                       </NavItem>
                       <NavItem>
-                        <NavLink className="nav-link" to="/signup">Login</NavLink>
+                        <NavLink className="nav-link" to="/signup">Sign up</NavLink>
                       </NavItem>
                     </>
                   }
@@ -84,6 +88,7 @@ class App extends Component {
             <Route path="/311" component={HpdContainer} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
+            <Route path="/signout" component={Signout} />
           </div>
         </Router>
       </>

@@ -43,7 +43,7 @@ class HpdContainer extends Component {
     return (
       <div className="container mt-5 pt-5">
       <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 className="h2">Complaints, Violations, and Problems</h1>
+        <h1 className="h2">Complaints and Violations</h1>
       </div>
         <Nav tabs>
           <NavItem>

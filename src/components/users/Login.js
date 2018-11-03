@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import login from '../../actions/authActions'
+import { login } from '../../actions/authActions';
 
 class LoginForm extends Component {
   state = {
@@ -25,8 +25,10 @@ class LoginForm extends Component {
 
   render() {
     return (
-      <div>
-        <h2>Welcome back! Sign in to continue.</h2>
+      <div className="container mt-5">
+        <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+          <h1 className="h2">Sign in</h1>
+        </div>
         <form onSubmit={this.handleSubmit}>
           <div>
             <label>Email:</label><br />

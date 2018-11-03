@@ -1,5 +1,4 @@
 export function setAddress(address, user) {
-  debugger;
   return (dispatch) => {
     dispatch({ type: 'LOADING_ADDRESS' });
     return fetch(`https://api.cityofnewyork.us/geoclient/v1/address.json?houseNumber=${address.houseNumber}&street=${address.street}&zip=${address.zip}&app_id=f9c9628a&app_key=330f11b7efef935b69550b93499bc7a3`)

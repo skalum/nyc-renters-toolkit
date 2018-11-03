@@ -1,12 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import {
-  ListGroup,
-  ListGroupItem,
-  ListGroupItemText,
-  ListGroupItemHeading,
-  UncontrolledTooltip, } from 'reactstrap';
+import { UncontrolledTooltip } from 'reactstrap';
 
 import { setAddress, setRegistrationId, setRegistrationInfo } from '../actions/addressActions'
 
