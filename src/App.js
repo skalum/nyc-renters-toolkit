@@ -66,7 +66,7 @@ class App extends Component {
                       <NavItem>
                         <NavLink className="nav-link" to="/signout">Sign out</NavLink>
                       </NavItem>
-                      </>
+                    </>
                   }
                   {!this.props.isAuthenticated &&
                     <>

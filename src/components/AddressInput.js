@@ -1,4 +1,11 @@
 import React, { Component } from 'react';
+import {
+  Col,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  Button, } from 'reactstrap'
 
 class AddressInput extends Component {
   state = {
@@ -20,29 +27,27 @@ class AddressInput extends Component {
 
   render() {
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <input
-            type="text"
-            name="houseNumber"
-            value={this.state.houseNumber}
-            onChange={this.handleChange}
-          />
-          <input
-            type="text"
-            name="street"
-            value={this.state.street}
-            onChange={this.handleChange}
-          />
-          <input
-            type="text"
-            name="zip"
-            value={this.state.zip}
-            onChange={this.handleChange}
-          />
-          <input type="submit" />
-        </form>
-      </div>
+      <Form onSubmit={this.handleSubmit}>
+        <FormGroup row>
+          <Label for="houseNumber" sm={2}>House number</Label>
+          <Col sm={4}>
+            <Input type="number" name="houseNumber" id="houseNumber" value={this.props.houseNumber} onChange={this.handleChange} />
+          </Col>
+        </FormGroup>
+        <FormGroup row>
+          <Label for="street" sm={2}>Street name</Label>
+          <Col sm={4}>
+            <Input type="text" name="street" id="street" value={this.props.street} onChange={this.handleChange} />
+          </Col>
+        </FormGroup>
+        <FormGroup row>
+          <Label for="houseNumber" sm={2}>ZIP code</Label>
+          <Col sm={4}>
+            <Input type="number" name="zip" id="zip" value={this.props.zip} onChange={this.handleChange} />
+          </Col>
+        </FormGroup>
+        <Button>Submit</Button>
+      </Form>
     );
   }
 };

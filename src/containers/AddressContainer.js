@@ -17,8 +17,8 @@ class AddressContainer extends Component {
   render() {
     return (
       <div className="container mt-5 pt-5">
-        <AddressInput setAddress={this.props.setAddress} user={this.props.user} />
         <Address address={this.props.address} />
+        <AddressInput setAddress={this.props.setAddress} user={this.props.user} />
       </div>
     );
   }
