@@ -38,7 +38,7 @@ class App extends Component {
 
   componentDidMount() {
     if (this.props.isAuthenticated) {
-      this.props.login({token: localStorage["renter.token"]}, this.props.history);
+      this.props.login({token: localStorage["renter.token"]}, this.props.history)
     }
   }
 

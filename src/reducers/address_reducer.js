@@ -3,7 +3,7 @@ export default function hpdReducer (state = {
   loadingRegistrationId: false,
   loadingRegistrationInfo: false,
   address: {
-    firstBoroughName: ''
+    firstBoroughName: '',
   },
   registrationId: '',
   registration: {
@@ -19,7 +19,7 @@ export default function hpdReducer (state = {
         loadingAddress: true,
       };
 
-    case 'FETCH_ADDRESS':
+    case 'LOADED_ADDRESS':
       return {
         ...state,
         loadingAddress: false,
@@ -36,7 +36,7 @@ export default function hpdReducer (state = {
       return {
         ...state,
         loadingRegistrationId: false,
-        registrationId: action.registrationid,
+        registrationId: action.registrationId,
       };
 
     case 'LOADING_REGISTRATION_INFO':

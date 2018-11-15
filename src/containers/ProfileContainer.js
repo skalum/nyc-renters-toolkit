@@ -10,13 +10,6 @@ class ProfileContainer extends Component {
   componentDidMount() {
     if (!this.props.houseNumber && this.props.user.houseNumber !== '') {
       this.props.setAddress(this.props.user, this.props.user)
-        .then(() => this.props.setRegistrationId(this.props.bin))
-        .then(() => this.props.setRegistrationInfo(this.props.registrationId));
-//        .then(() => this.props.getUnitsInfo(this.props.bin));
-    } else {
-      this.props.setRegistrationId(this.props.bin)
-        .then(() => this.props.setRegistrationInfo(this.props.registrationId));
-//        .then(() => this.props.getUnitsInfo(this.props.bin));
     }
   }
 
@@ -39,7 +32,7 @@ class ProfileContainer extends Component {
               <dt>Address</dt>
               <dd>
                 {this.props.houseNumber} {this.props.streetName} <br />
-                {this.props.city}, {this.props.zip}
+                {this.props.city}, NY {this.props.zip}
               </dd>
               <dt>BBL</dt>
               <dd>
