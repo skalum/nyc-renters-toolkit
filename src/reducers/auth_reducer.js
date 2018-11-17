@@ -1,7 +1,11 @@
 const initialState = {
   isAuthenticated: localStorage.getItem('renter.token') ? true : false,
   isAuthenticating: false,
-  currentUser: {},
+  currentUser: {
+    houseNumber: '',
+    street: '',
+    zip: '',
+  },
   errorMessage: ''
 }
 

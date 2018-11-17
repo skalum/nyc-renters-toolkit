@@ -18,6 +18,7 @@ import {
 import AddressContainer from './containers/AddressContainer'
 import ProfileContainer from './containers/ProfileContainer'
 import HpdContainer from './containers/HpdContainer'
+import ZillowContainer from './containers/ZillowContainer'
 import Login from './components/users/Login'
 import Signup from './components/users/Signup'
 import Signout from './components/users/Signout'
@@ -38,7 +39,9 @@ class App extends Component {
 
   componentDidMount() {
     if (this.props.isAuthenticated) {
-      this.props.login({token: localStorage["renter.token"]}, this.props.history)
+      this.props.login({token: localStorage["renter.token"]}, this.props.history).then(() => {
+        this.props.setAddress(this.props.user);
+      })
     }
   }
 
@@ -57,12 +60,19 @@ class App extends Component {
                       <NavItem>
                         <NavLink className="nav-link" to="/address">Set Address</NavLink>
                       </NavItem>
-                      <NavItem>
-                        <NavLink className="nav-link" to="/profile">Profile</NavLink>
-                      </NavItem>
-                      <NavItem>
-                        <NavLink className="nav-link" to="/311">311</NavLink>
-                      </NavItem>
+                      {this.props.address.houseNumber &&
+                        <>
+                          <NavItem>
+                            <NavLink className="nav-link" to="/profile">Profile</NavLink>
+                          </NavItem>
+                          <NavItem>
+                            <NavLink className="nav-link" to="/311">311</NavLink>
+                          </NavItem>
+                          <NavItem>
+                            <NavLink className="nav-link" to="/zillow">Zillow</NavLink>
+                          </NavItem>
+                        </>
+                      }
                       <NavItem>
                         <NavLink className="nav-link" to="/signout">Sign out</NavLink>
                       </NavItem>
@@ -86,6 +96,7 @@ class App extends Component {
             <Route path="/address" component={AddressContainer} />
             <Route path="/profile" component={ProfileContainer} />
             <Route path="/311" component={HpdContainer} />
+            <Route path="/zillow" component={ZillowContainer} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
             <Route path="/signout" component={Signout} />

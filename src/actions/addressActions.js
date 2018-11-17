@@ -7,7 +7,6 @@ export function setAddress(address) {
         const bin = getState().address.address.buildingIdentificationNumber;
         return dispatch(setRegistrationId(bin)).then(() => {
           if(getState().address.registrationId !== '') {
-            debugger;
             const registrationId = getState().address.registrationId;
             return dispatch(setRegistrationInfo(registrationId));
           }

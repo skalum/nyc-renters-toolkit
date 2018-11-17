@@ -55,15 +55,15 @@ class ProfileContainer extends Component {
               <dt>Neighborhood</dt>
               <dd>{this.props.ntaName}</dd>
               <dt>Community District</dt>
-              <dd><a href={`https://communityprofiles.planning.nyc.gov/${this.props.borough.toLowerCase().replace(' ', '-')}/${this.props.communityDistrictNumber}`}>{this.props.communityDistrictNumber}</a></dd>
+              <dd><a href={`https://communityprofiles.planning.nyc.gov/${this.props.borough.toLowerCase().replace(' ', '-')}/${this.props.communityDistrictNumber}`} target="_blank" rel="noopener noreferrer">{this.props.communityDistrictNumber}</a></dd>
               <dt>City Council</dt>
-              <dd>{this.props.cityCouncilDistrict}</dd>
+              <dd><a href={`https://council.nyc.gov/district-${this.props.cityCouncilDistrict.replace(/^0+/, '')}/`} target="_blank" rel="noopener noreferrer">{this.props.cityCouncilDistrict}</a></dd>
               <dt>Police Precinct</dt>
-              <dd><a href={`https://www1.nyc.gov/site/nypd/bureaus/patrol/precincts/${this.getOrdinal(this.props.policePrecinct).replace(/^0+/, '')}-precinct.page`}>{this.props.policePrecinct}</a></dd>
+              <dd><a href={`https://www1.nyc.gov/site/nypd/bureaus/patrol/precincts/${this.getOrdinal(this.props.policePrecinct).replace(/^0+/, '')}-precinct.page`} target="_blank" rel="noopener noreferrer">{this.props.policePrecinct}</a></dd>
               <dt>Fire Company</dt>
-              <dd><a href="https://www1.nyc.gov/site/fdny/index.page">{this.props.fireCompanyType}{this.props.fireCompanyNumber}</a></dd>
+              <dd><a href="https://www1.nyc.gov/site/fdny/index.page" target="_blank" rel="noopener noreferrer">{this.props.fireCompanyType}{this.props.fireCompanyNumber}</a></dd>
               <dt>School District</dt>
-              <dd><a href={`https://insideschools.org/districts/${this.props.communitySchoolDistrict}`}>{this.props.communitySchoolDistrict}</a></dd>
+              <dd><a href={`https://insideschools.org/districts/${this.props.communitySchoolDistrict}`} target="_blank" rel="noopener noreferrer">{this.props.communitySchoolDistrict}</a></dd>
               <dt>Census Tract</dt>
               <dd>{this.props.censusTract2010}</dd>
             </dl>

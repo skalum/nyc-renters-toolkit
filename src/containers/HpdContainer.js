@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col } from 'reactstrap';
+import { Button, TabContent, TabPane, Nav, NavItem, NavLink, Row, Col } from 'reactstrap';
 import classnames from 'classnames';
 
 import { setAddress, setRegistrationId, setRegistrationInfo } from '../actions/addressActions'
@@ -42,9 +42,12 @@ class HpdContainer extends Component {
   render() {
     return (
       <div className="container mt-5 pt-5">
-      <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 className="h2">Complaints and Violations</h1>
-      </div>
+        <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+          <h1 className="h2">Complaints and Violations</h1>
+        </div>
+
+        <Button color="primary" href="https://www1.nyc.gov/311/" target="_blank" >File a new complaint</Button><br /><br />
+
         <Nav tabs>
           <NavItem>
             <NavLink
