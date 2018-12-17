@@ -3,7 +3,7 @@ export function setAddress(address) {
     return dispatch(getAddress(address)).then(() => {
       const user = getState().auth.currentUser;
       const fetchedAddress = getState().address.address;
-      return dispatch(persistUserAddress(fetchedAddress, user)).then(() => {
+      return dispatch(persistUserAddress({ ...fetchedAddress, apt: address.apt }, user)).then(() => {
         const bin = getState().address.address.buildingIdentificationNumber;
         return dispatch(setRegistrationId(bin)).then(() => {
           if(getState().address.registrationId !== '') {
@@ -21,7 +21,7 @@ export function getAddress(address) {
     dispatch({ type: 'LOADING_ADDRESS' });
     return fetch(`https://api.cityofnewyork.us/geoclient/v1/address.json?houseNumber=${address.houseNumber}&street=${address.street}&zip=${address.zip}&app_id=f9c9628a&app_key=330f11b7efef935b69550b93499bc7a3`)
       .then(response => response.json()).then(response => {
-        dispatch({ type: 'LOADED_ADDRESS', address: response.address });
+        dispatch({ type: 'LOADED_ADDRESS', address: { ...response.address, apt: address.apt } });
     }, error => {
       dispatch({ type: 'LOAD_ADDRESS_FAILURE' })
     })
@@ -37,6 +37,7 @@ export function persistUserAddress(address, user) {
         bin: address.buildingIdentificationNumber,
         houseNumber: address.houseNumber,
         street: address.boePreferredStreetName,
+        apt: address.apt,
         zip: address.zipCode,
       }),
       headers: {

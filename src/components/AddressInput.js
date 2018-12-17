@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {
   Col,
+  Row,
   Form,
   FormGroup,
   Label,
@@ -11,6 +12,7 @@ class AddressInput extends Component {
   state = {
     houseNumber: '',
     street: '',
+    apt: '',
     zip: '',
   }
 
@@ -28,23 +30,27 @@ class AddressInput extends Component {
   render() {
     return (
       <Form onSubmit={this.handleSubmit}>
-        <FormGroup row>
-          <Label for="houseNumber" sm={2}>House number</Label>
-          <Col sm={4}>
-            <Input type="number" name="houseNumber" id="houseNumber" value={this.props.houseNumber} onChange={this.handleChange} />
+        <Row form>
+          <Col md={2}>
+            <FormGroup>
+              <Label for="houseNumber">House number</Label>
+              <Input type="number" name="houseNumber" id="houseNumber" value={this.props.houseNumber} onChange={this.handleChange} />
+            </FormGroup>
           </Col>
+          <Col md={10}>
+            <FormGroup>
+              <Label for="street">Street name</Label>
+              <Input type="text" name="street" id="street" value={this.props.street} onChange={this.handleChange} />
+            </FormGroup>
+          </Col>
+        </Row>
+        <FormGroup>
+          <Label for="apt">Apt number</Label>
+          <Input type="text" name="apt" id="apt" value={this.props.apt} onChange={this.handleChange} />
         </FormGroup>
-        <FormGroup row>
-          <Label for="street" sm={2}>Street name</Label>
-          <Col sm={4}>
-            <Input type="text" name="street" id="street" value={this.props.street} onChange={this.handleChange} />
-          </Col>
-        </FormGroup>
-        <FormGroup row>
-          <Label for="houseNumber" sm={2}>ZIP code</Label>
-          <Col sm={4}>
-            <Input type="number" name="zip" id="zip" value={this.props.zip} onChange={this.handleChange} />
-          </Col>
+        <FormGroup>
+          <Label for="zip">ZIP code</Label>
+          <Input type="number" name="zip" id="zip" value={this.props.zip} onChange={this.handleChange} />
         </FormGroup>
         <Button>Submit</Button>
       </Form>
