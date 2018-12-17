@@ -12,6 +12,7 @@ class ZillowContainer extends Component {
     const address = {
       houseNumber: this.props.address.houseNumber,
       street: this.props.address.boePreferredStreetName,
+      apt: this.props.address.apt,
       city: this.props.address.uspsPreferredCityName,
       zip: this.props.address.zipCode,
     }
