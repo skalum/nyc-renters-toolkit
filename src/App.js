@@ -111,7 +111,7 @@ const Home = () => (
   <div role="main" class="container">
     <br /><br /><br />
       <Jumbotron>
-        <h1 className="display-3">Weclcome to the NYC Renter Toolkit!</h1>
+        <h1 className="display-3">Welcome to the NYC Renter Toolkit!</h1>
         <p className="lead">All the information you need about your building and neighborhood!</p>
         <hr className="my-2" />
         <p>Click below to get started...</p>
