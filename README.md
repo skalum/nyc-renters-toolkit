@@ -10,7 +10,7 @@ Use the package manager [npm](https://www.npmjs.com/get-npm) to install NYC Rent
 npm install
 ```
 
-Must also install NYC Renter Toolkit API:
+Must also install NYC Renter Toolkit API: https://github.com/skalum/nyc-renter-toolkit-api
 
 ## Usage
 
